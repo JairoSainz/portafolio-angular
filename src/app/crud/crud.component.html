@@ -1,0 +1,30 @@
+<div class="p-6 max-w-xl mx-auto bg-white rounded-xl shadow-md space-y-4">
+  <h2 class="text-2xl font-bold text-gray-800">Gestión de Usuarios</h2>
+
+  <form (ngSubmit)="editandoIndex !== null ? actualizarUsuario() : agregarUsuario()" class="space-y-4">
+    <input [(ngModel)]="nuevoUsuario.nombre" name="nombre" placeholder="Nombre" class="w-full p-2 border rounded" />
+    <input [(ngModel)]="nuevoUsuario.correo" name="correo" placeholder="Correo" class="w-full p-2 border rounded" />
+
+    <div class="flex gap-2">
+      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">
+        {{ editandoIndex !== null ? 'Actualizar' : 'Agregar' }}
+      </button>
+      <button *ngIf="editandoIndex !== null" (click)="cancelarEdicion()" type="button" class="bg-gray-400 text-white px-4 py-2 rounded">
+        Cancelar
+      </button>
+    </div>
+  </form>
+
+  <ul class="divide-y divide-gray-200">
+    <li *ngFor="let usuario of usuarios; let i = index" class="py-2 flex justify-between items-center">
+      <div>
+        <p class="font-semibold">{{ usuario.nombre }}</p>
+        <p class="text-sm text-gray-500">{{ usuario.correo }}</p>
+      </div>
+      <div class="space-x-2">
+        <button (click)="editarUsuario(i)" class="text-blue-500">Editar</button>
+        <button (click)="eliminarUsuario(i)" class="text-red-500">Eliminar</button>
+      </div>
+    </li>
+  </ul>
+</div>
